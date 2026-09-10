@@ -1,26 +1,82 @@
 ---
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { getCollection } from "astro:content";
 
-import { Background } from '@/components/background';
-import { FAQ } from '@/components/blocks/faq';
-import { Features } from '@/components/blocks/features';
-import { Hero } from '@/components/blocks/hero';
-import { Logos } from '@/components/blocks/logos';
-import { Pricing } from '@/components/blocks/pricing';
-import DefaultLayout from '@/layouts/DefaultLayout.astro';
+import { Background } from "@/components/background";
+import { Faq } from "@/components/blocks/faq";
+import { Hero } from "@/components/blocks/hero";
+import { Logos } from "@/components/blocks/logos";
+import { Pricing } from "@/components/blocks/pricing";
+import CtaBand from "@/components/site/CtaBand.astro";
+import { FeaturedCaseStudy } from "@/components/site/FeaturedCaseStudy";
+import ProcessSteps from "@/components/site/ProcessSteps.astro";
+import SectionHeading from "@/components/site/SectionHeading.astro";
+import { ServicesBento } from "@/components/site/ServicesBento";
+import { SITE } from "@/consts";
+import DefaultLayout from "@/layouts/DefaultLayout.astro";
 
-
-
+const services = (await getCollection("services")).map((s) => ({
+  id: s.id,
+  ...s.data,
+}));
+const featured = (await getCollection("work", (w) => w.data.featured))[0];
+const faq = (await getCollection("faq", (f) => f.data.showOnHome))
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((f) => f.data);
+const tiers = (await getCollection("pricing")).map((t) => t.data);
 ---
 
-<DefaultLayout title={SITE_TITLE} description={SITE_DESCRIPTION} >
-  <Background className="via-muted to-muted/80">
+<DefaultLayout title={SITE.name} description={SITE.description}>
+  <Background>
     <Hero />
-    <Logos client:only="react"/> 
-    <Features />
   </Background>
-  <Background variant="bottom">
-    <Pricing client:only='react'/>
-    <FAQ client:only='react'/>
-  </Background>
+
+  <Logos client:visible />
+
+  <section class="container py-20 lg:py-28">
+    <SectionHeading
+      eyebrow="What I build"
+      title="Software for the parts of your business that still run on paper"
+      sub="Each one is built around your process, hosted for you, and owned by you."
+    />
+    <div class="mt-12">
+      <ServicesBento client:visible services={services} />
+    </div>
+  </section>
+
+  {
+    featured && (
+      <section class="container pb-20 lg:pb-28">
+        <FeaturedCaseStudy
+          client:visible
+          study={{ slug: featured.id, ...featured.data }}
+        />
+      </section>
+    )
+  }
+
+  <section class="container py-20 lg:py-28">
+    <SectionHeading
+      eyebrow="How a project runs"
+      title="No surprises: fixed quote, weekly demos, you own the result"
+    />
+    <div class="mt-12"><ProcessSteps /></div>
+  </section>
+
+  <section class="container py-20 lg:py-28">
+    <SectionHeading
+      eyebrow="Pricing"
+      title="Clear ranges before we talk"
+      sub="Every project gets a fixed quote after a free call."
+    />
+    <Pricing client:visible tiers={tiers} className="mt-12" />
+  </section>
+
+  <section class="container py-20 lg:py-28">
+    <SectionHeading eyebrow="FAQ" title="Questions owners ask first" />
+    <div class="mx-auto mt-12 max-w-3xl">
+      <Faq client:visible items={faq} />
+    </div>
+  </section>
+
+  <CtaBand />
 </DefaultLayout>

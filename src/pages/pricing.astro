@@ -1,14 +1,20 @@
 ---
+import { getCollection } from 'astro:content';
+
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
 import { Background } from '@/components/background';
 import { Pricing } from '@/components/blocks/pricing';
 import { PricingTable } from '@/components/blocks/pricing-table';
 import DefaultLayout from '@/layouts/DefaultLayout.astro';
+
+// Task 10 rewrites this page; this keeps it building against the new
+// data-driven Pricing block in the meantime.
+const tiers = (await getCollection('pricing')).map((t) => t.data);
 ---
 <DefaultLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
   <Background>
-    <Pricing client:only='react' className="py-28 text-center lg:pt-44 lg:pb-32" />
+    <Pricing client:visible tiers={tiers} className="container max-w-5xl py-28 lg:pt-44 lg:pb-32" />
     <PricingTable />
   </Background>
 </DefaultLayout>
