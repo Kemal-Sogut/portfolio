@@ -1,0 +1,6 @@
+{
+  "order": 4,
+  "question": "Who owns the code and the data?",
+  "answer": "You do. The code lives in a repository under your name, the database is in your account, and I document how to run it. If we part ways, you keep everything.",
+  "showOnHome": true
+}

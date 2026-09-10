@@ -1,0 +1,18 @@
+{
+  "order": 4,
+  "title": "Invoicing, payments & documents",
+  "icon": "Receipt",
+  "tagline": "Estimates that become invoices, receipts that send themselves, warranties on file.",
+  "forWho": "Owners who still build invoices in Word and chase e-Transfers by hand.",
+  "youGet": [
+    "Estimate → invoice → receipt flow with a running balance",
+    "e-Transfer or Stripe payment matching",
+    "Warranty certificates and other generated documents",
+    "Tax handled correctly (HST) and locked prices once a quote is sent"
+  ],
+  "example": {
+    "slug": "calculo",
+    "text": "Calculo is an invoicing product with a formula engine, Stripe payments and PDF generation."
+  },
+  "range": "Typically $4,000–$12,000"
+}

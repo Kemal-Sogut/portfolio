@@ -1,0 +1,6 @@
+{
+  "order": 6,
+  "question": "What do you build with?",
+  "answer": "TypeScript end to end: React front ends, APIs on Cloudflare Workers or Node, Postgres via Supabase, and email through Resend. Boring, proven, cheap to host and easy for another developer to pick up.",
+  "showOnHome": false
+}

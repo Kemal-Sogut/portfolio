@@ -1,0 +1,22 @@
+---
+title: "Calculo — invoicing for small businesses"
+client: "Own product (in progress)"
+summary: "Estimates, invoices, formula-based pricing and Stripe payments for small service businesses."
+year: 2026
+status: "in-progress"
+order: 3
+services: ["invoicing"]
+stack: ["Next.js", "tRPC", "Prisma + Postgres", "Supabase Auth", "Stripe", "Resend", "Turborepo"]
+---
+
+## Why
+
+Every small business I have worked with rebuilds the same estimate → invoice → payment flow. Calculo is that flow as a product: clients, products, templates, a formula engine for pricing rules, PDF documents and Stripe payment links.
+
+## How it runs
+
+A Turborepo monorepo: Next.js app with tRPC routers per domain (clients, estimates, invoices, payments, templates, formulas), Prisma on Postgres, shared packages for the formula engine and email templates. Tenant scoping, status transitions and plan limits are covered by tests.
+
+## Status
+
+Private beta. Ask me for a walkthrough if your business needs invoicing done properly.

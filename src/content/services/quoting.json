@@ -1,0 +1,18 @@
+{
+  "order": 1,
+  "title": "Field quoting & estimating tools",
+  "icon": "Ruler",
+  "tagline": "Quote on-site from a tablet. Send a branded PDF before you leave the driveway.",
+  "forWho": "Trades and home-services businesses that measure, price and quote in the customer's home: blinds, cabinetry, flooring, HVAC, landscaping.",
+  "youGet": [
+    "Measurement entry designed for a phone or tablet, with live pricing as you type",
+    "Your own pricing rules (minimums, per-metre, per-panel, options and add-ons)",
+    "Branded estimate and invoice PDFs emailed to the customer",
+    "A customer link to review, request changes and confirm online"
+  ],
+  "example": {
+    "slug": "measure-blinds",
+    "text": "Measure Blinds prices ten blind types by formula and lets Blinds Nisa customers confirm by email."
+  },
+  "range": "Typically $7,500–$20,000"
+}

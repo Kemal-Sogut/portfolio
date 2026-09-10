@@ -1,0 +1,18 @@
+{
+  "order": 3,
+  "title": "Customer portals",
+  "icon": "Users",
+  "tagline": "Let customers see their order, pay a deposit and pick an install time without calling you.",
+  "forWho": "Businesses that field the same status calls every day.",
+  "youGet": [
+    "A private link per order with a progress tracker",
+    "Deposit and balance instructions that appear only when money is owed",
+    "Install-time confirmation and change requests",
+    "Automatic emails at each step"
+  ],
+  "example": {
+    "slug": "measure-blinds",
+    "text": "Blinds Nisa customers confirm estimates, see a 5-step tracker and accept installation windows online."
+  },
+  "range": "Typically $4,000–$10,000 as an add-on"
+}

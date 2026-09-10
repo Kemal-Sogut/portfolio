@@ -1,0 +1,18 @@
+{
+  "order": 5,
+  "title": "Automation & integrations",
+  "icon": "Workflow",
+  "tagline": "The reminders, expiries and hand-offs that fall through the cracks, done by software.",
+  "forWho": "Anyone paying staff to copy data between tools.",
+  "youGet": [
+    "Scheduled jobs (nightly expiries, weekly digests, reminders)",
+    "Webhooks from your payment, email or booking providers",
+    "Connections to the tools you already use",
+    "Logs so you can see what ran and when"
+  ],
+  "example": {
+    "slug": "measure-blinds",
+    "text": "A daily job expires stale estimates; a webhook records e-Transfers against the right order."
+  },
+  "range": "From $1,500 per integration"
+}

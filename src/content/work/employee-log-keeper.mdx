@@ -1,0 +1,31 @@
+---
+title: "Employee Log Keeper for PLAY"
+client: "PLAY — Platform for Leisure and Achievement of Youth"
+summary: "A staff logging and attendance tool that replaced manual tracking for a 30-person non-profit team."
+year: 2025
+status: "delivered"
+order: 2
+services: ["internal-tools"]
+stack: ["React", "TypeScript", "Vite", "Tailwind + shadcn/ui", "Supabase Postgres + Auth"]
+repoUrl: "https://github.com/Kemal-Sogut/employee-log-keeper"
+metrics:
+  - { value: 30, suffix: "+", label: "staff using it daily" }
+  - { value: 1000, suffix: "+", label: "log entries in the first two months" }
+  - { value: 50, suffix: "%", label: "faster data collection (reported by PLAY)" }
+---
+
+## The problem
+
+Staff activity and hours were tracked by hand and collected at the end of each period. Supervisors could not see what happened across the organisation without chasing people.
+
+## What was built
+
+An account-based web app: employees log their daily actions from a phone; supervisors review activity across the organisation, filter by person and period, and see total worked hours on a dashboard.
+
+## How it runs
+
+React + TypeScript front end with shadcn/ui, Supabase for Postgres, authentication and row-level security, deployed as a static site. Design-verification testing before launch and support through the summer.
+
+## Outcome
+
+Adopted by 30+ employees with 1,000+ entries in the first two months. PLAY reported data collection about 50% faster than the manual process.

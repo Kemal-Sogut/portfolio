@@ -1,0 +1,18 @@
+{
+  "order": 2,
+  "title": "Internal tools & dashboards",
+  "icon": "LayoutDashboard",
+  "tagline": "Replace the shared spreadsheet with something your staff actually use.",
+  "forWho": "Teams of 5–50 that track hours, logs, jobs, inventory or approvals by hand.",
+  "youGet": [
+    "Role-based logins for staff and managers",
+    "Fast forms on mobile, searchable history on desktop",
+    "Exports and summaries for payroll, reporting or audits",
+    "Hosted, backed up and monitored"
+  ],
+  "example": {
+    "slug": "employee-log-keeper",
+    "text": "Employee Log Keeper handled 30+ staff and 1,000+ entries in its first two months at PLAY."
+  },
+  "range": "Typically $5,000–$12,000"
+}

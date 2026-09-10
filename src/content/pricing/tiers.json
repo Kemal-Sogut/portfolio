@@ -1,0 +1,49 @@
+[
+  {
+    "id": "website",
+    "name": "Website",
+    "price": "from $1,800",
+    "blurb": "A fast marketing site that brings in enquiries.",
+    "features": [
+      "Up to 8 pages",
+      "Contact / quote forms with spam protection",
+      "Hosting, domain, SSL and analytics set up",
+      "Two revision rounds",
+      "30 days of edits included"
+    ],
+    "cta": "Start a website",
+    "timeline": "2–3 weeks"
+  },
+  {
+    "id": "app",
+    "name": "Custom web app",
+    "price": "from $7,500",
+    "blurb": "Quoting tools, portals, dashboards and automations built around how you work.",
+    "features": [
+      "Free discovery call and written scope",
+      "Design, build, testing and deployment",
+      "Your pricing rules, documents and emails",
+      "Training for your staff",
+      "30 days of fixes after launch",
+      "Typical range $7,500–$20,000"
+    ],
+    "cta": "Scope my app",
+    "highlighted": true,
+    "timeline": "4–10 weeks"
+  },
+  {
+    "id": "care",
+    "name": "Care plan",
+    "price": "$150",
+    "period": "/month",
+    "blurb": "Keep it running, backed up and improving.",
+    "features": [
+      "Hosting and monitoring",
+      "Weekly backups",
+      "Security and dependency updates",
+      "Priority reply within one business day",
+      "$600/month plan adds 8 hours of changes"
+    ],
+    "cta": "Ask about care plans"
+  }
+]

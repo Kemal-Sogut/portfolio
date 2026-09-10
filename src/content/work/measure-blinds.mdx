@@ -1,0 +1,41 @@
+---
+title: "Measure Blinds — field estimator for Blinds Nisa"
+client: "Blinds Nisa, Ottawa"
+summary: "Consultants measure and price ten blind types on a tablet, email a branded PDF, and customers confirm, pay and book installation online."
+year: 2026
+status: "live"
+featured: true
+order: 1
+services: ["quoting", "portals", "invoicing", "automation"]
+stack: ["React", "Vite", "TypeScript", "Hono on Cloudflare Workers", "Supabase Postgres + Auth", "Resend", "pdf-lib"]
+liveUrl: "https://measure-blinds.blindsnisa.workers.dev"
+repoUrl: "https://github.com/Kemal-Sogut/measure-blinds"
+metrics:
+  - { value: 400, suffix: "+", label: "commits shipped in 10 weeks" }
+  - { value: 10, suffix: "", label: "blind types priced by formula" }
+  - { value: 47, suffix: "", label: "automated test files" }
+  - { value: 13, suffix: "", label: "transactional email templates" }
+---
+
+## The problem
+
+Blinds Nisa consultants measured windows on paper, priced by hand from fabric and hardware tables, and typed estimates up later. Errors crept in on minimum sizes and panel splits, quotes went out late, and nobody could tell which estimates had been accepted.
+
+## What was built
+
+A mobile-first web app the consultant opens on a tablet in the customer's living room.
+
+- **Live pricing** for ten blind types (roller, zebra, honeycomb, roman, shutters, curtains and more). Each type is its own pricing module with its own rules; hardware options are priced per metre, per square metre, per unit or per panel.
+- **Bulk entry**: measure every window in a room first, choose fabric and options once, and the app creates one line item per window.
+- **Branded PDFs** generated on the server and emailed through Resend. The document is an *Estimate* until the first payment, then an *Invoice*.
+- **A customer page** with a five-step tracker: confirm the estimate, see deposit instructions, watch production, accept an installation window, request changes.
+- **Money handled properly**: locked prices once a quote is sent, a payment ledger, a 50% deposit that triggers production, e-Transfer matching by webhook, receipts and warranty certificates.
+- **Manufacturing output**: production labels and a cut sheet that packs aluminium bars (one-dimensional bin packing) and fabric rolls (two-dimensional shelf packing) to reduce waste.
+
+## How it runs
+
+React + Vite front end, Hono API on Cloudflare Workers, Supabase Postgres with row-level security, daily cron for estimate expiry. Every pricing rule has unit tests; routes have integration tests; a live end-to-end script runs against the real database and cleans up after itself.
+
+## Outcome
+
+Estimates go out before the consultant leaves the house, customers confirm by email, and the shop sees every order's status without a phone call.

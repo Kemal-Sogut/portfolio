@@ -1,0 +1,6 @@
+{
+  "order": 1,
+  "question": "Are you an agency or one person?",
+  "answer": "One person. I do the discovery, design, build, testing and deployment myself. You always talk to the engineer who wrote the code, and there is no agency overhead in the price.",
+  "showOnHome": true
+}
