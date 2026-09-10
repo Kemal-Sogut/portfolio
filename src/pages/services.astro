@@ -1,0 +1,42 @@
+---
+import { getCollection } from "astro:content";
+
+import CtaBand from "@/components/site/CtaBand.astro";
+import SectionHeading from "@/components/site/SectionHeading.astro";
+import ServiceSection from "@/components/site/ServiceSection.astro";
+import DefaultLayout from "@/layouts/DefaultLayout.astro";
+
+const services = (await getCollection("services")).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+---
+
+<DefaultLayout
+  title="Services"
+  description="Custom quoting tools, internal dashboards, customer portals, invoicing, automations and websites for local businesses in Ottawa."
+>
+  <section class="container pt-28 pb-8 lg:pt-40">
+    <SectionHeading
+      eyebrow="Services"
+      title="Six things I build, each with a real example"
+      sub="Pick the one closest to your problem. If none fit, the contact form has a 'not sure yet' option."
+      align="left"
+    />
+    <nav class="mt-8 flex flex-wrap gap-2" aria-label="Services">
+      {
+        services.map((s) => (
+          <a
+            href={`#${s.id}`}
+            class="hover:border-primary rounded-full border px-3 py-1 text-sm transition-colors"
+          >
+            {s.data.title}
+          </a>
+        ))
+      }
+    </nav>
+  </section>
+
+  {services.map((s, i) => <ServiceSection id={s.id} {...s.data} flip={i % 2 === 1} />)}
+
+  <CtaBand />
+</DefaultLayout>

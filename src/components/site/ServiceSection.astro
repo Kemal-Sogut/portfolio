@@ -1,0 +1,69 @@
+---
+import { buttonVariants } from "@/components/ui/button";
+
+interface Props {
+  id: string;
+  title: string;
+  tagline: string;
+  forWho: string;
+  youGet: string[];
+  example: { slug: string; text: string };
+  range: string;
+  flip?: boolean;
+}
+
+const {
+  id,
+  title,
+  tagline,
+  forWho,
+  youGet,
+  example,
+  range,
+  flip = false,
+} = Astro.props;
+---
+
+<section id={id} class="scroll-mt-24 border-t py-16 lg:py-24">
+  <div
+    class={`container grid items-start gap-10 lg:grid-cols-2 ${flip ? "lg:[&>*:first-child]:order-2" : ""}`}
+  >
+    <div>
+      <h2 class="text-2xl font-semibold tracking-tight md:text-3xl">{title}</h2>
+      <p class="text-muted-foreground mt-3 text-lg">{tagline}</p>
+      <p class="mt-6 text-sm">
+        <span class="font-semibold">Who it&rsquo;s for:</span>
+        {forWho}
+      </p>
+      <p class="mt-4 font-mono text-sm">{range}</p>
+      <div class="mt-6 flex flex-wrap gap-3">
+        <a href={`/contact?type=${id}`} class={buttonVariants()}>Ask about this</a>
+        <a
+          href={`/work/${example.slug}`}
+          class={buttonVariants({ variant: "outline" })}
+        >
+          See an example
+        </a>
+      </div>
+    </div>
+    <div class="bg-card rounded-2xl border p-6">
+      <h3 class="font-semibold">What you get</h3>
+      <ul class="mt-4 space-y-3 text-sm">
+        {
+          youGet.map((g) => (
+            <li class="flex gap-3">
+              <span class="text-primary" aria-hidden="true">
+                ✓
+              </span>
+              <span>{g}</span>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="text-muted-foreground mt-6 border-t pt-4 text-sm">
+        <span class="font-semibold">Example:</span>
+        {example.text}
+      </p>
+    </div>
+  </div>
+</section>
