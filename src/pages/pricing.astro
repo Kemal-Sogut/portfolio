@@ -1,20 +1,78 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection } from "astro:content";
 
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { Faq } from "@/components/blocks/faq";
+import { Pricing } from "@/components/blocks/pricing";
+import { PricingTable } from "@/components/blocks/pricing-table";
+import CtaBand from "@/components/site/CtaBand.astro";
+import SectionHeading from "@/components/site/SectionHeading.astro";
+import DefaultLayout from "@/layouts/DefaultLayout.astro";
 
-import { Background } from '@/components/background';
-import { Pricing } from '@/components/blocks/pricing';
-import { PricingTable } from '@/components/blocks/pricing-table';
-import DefaultLayout from '@/layouts/DefaultLayout.astro';
-
-// Task 10 rewrites this page; this keeps it building against the new
-// data-driven Pricing block in the meantime.
-const tiers = (await getCollection('pricing')).map((t) => t.data);
+const tiers = (await getCollection("pricing")).map((t) => t.data);
+const faq = (await getCollection("faq"))
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((f) => f.data)
+  .filter((f) => /cost|long|after launch|owns/i.test(f.question));
 ---
-<DefaultLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
-  <Background>
-    <Pricing client:visible tiers={tiers} className="container max-w-5xl py-28 lg:pt-44 lg:pb-32" />
-    <PricingTable />
-  </Background>
+
+<DefaultLayout
+  title="Pricing"
+  description="Websites from $1,800, custom web apps from $7,500, care plans from $150/month. Fixed quotes, milestone billing, you own the code."
+>
+  <section class="container pt-28 lg:pt-40">
+    <SectionHeading
+      eyebrow="Pricing"
+      title="Prices in CAD, quotes in writing"
+      sub="These are starting points. After a free 30-minute call you get a fixed quote with milestones: 40% to start, 40% at the working demo, 20% at launch."
+    />
+    <Pricing client:load tiers={tiers} className="mt-12" />
+  </section>
+
+  <section class="container py-16">
+    <div class="grid gap-6 md:grid-cols-3">
+      <div class="rounded-2xl border p-6">
+        <p class="font-mono text-sm">Hourly</p>
+        <p class="mt-2 text-3xl font-semibold">
+          $75<span class="text-muted-foreground text-base">/hr</span>
+        </p>
+        <p class="text-muted-foreground mt-2 text-sm">
+          Small changes, rescue work, advice. Billed in 15-minute blocks,
+          monthly.
+        </p>
+      </div>
+      <div class="rounded-2xl border p-6">
+        <p class="font-mono text-sm">What moves the price</p>
+        <ul class="text-muted-foreground mt-2 space-y-1 text-sm">
+          <li>Number of user roles</li>
+          <li>Documents and emails to generate</li>
+          <li>Payments and third-party integrations</li>
+          <li>Data migration from spreadsheets</li>
+        </ul>
+      </div>
+      <div class="rounded-2xl border p-6">
+        <p class="font-mono text-sm">Always included</p>
+        <ul class="text-muted-foreground mt-2 space-y-1 text-sm">
+          <li>Code in a repo you own</li>
+          <li>Database in your account</li>
+          <li>Written hand-over notes</li>
+          <li>30 days of fixes after launch</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="container py-16">
+    <PricingTable client:visible />
+  </section>
+
+  <section class="container py-16">
+    <div class="mx-auto max-w-3xl">
+      <Faq client:visible items={faq} />
+    </div>
+  </section>
+
+  <CtaBand
+    heading="Want a number for your project?"
+    sub="Send three sentences about what you do and what is slow. I reply with a range within one business day."
+  />
 </DefaultLayout>
