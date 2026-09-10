@@ -24,13 +24,25 @@ const enumFrom = <T extends readonly { value: string }[]>(list: T) =>
   );
 
 export const contactSchema = z.object({
-  name: z.string().trim().min(2).max(80),
-  email: z.string().trim().email().max(120),
-  company: z.string().trim().max(120).optional(),
+  name: z
+    .string()
+    .trim()
+    .min(2, "Please enter your name.")
+    .max(80, "That name is too long."),
+  email: z
+    .string()
+    .trim()
+    .email("Please enter a valid email address.")
+    .max(120, "That email address is too long."),
+  company: z.string().trim().max(120, "That name is too long.").optional(),
   projectType: enumFrom(PROJECT_TYPES),
   budget: enumFrom(BUDGETS),
-  message: z.string().trim().min(20).max(3000),
-  turnstileToken: z.string().min(1),
+  message: z
+    .string()
+    .trim()
+    .min(20, "A sentence or two, please — at least 20 characters.")
+    .max(3000, "Please keep it under 3000 characters."),
+  turnstileToken: z.string().min(1, "Please complete the spam check."),
 });
 
 export type ContactInput = z.infer<typeof contactSchema>;
