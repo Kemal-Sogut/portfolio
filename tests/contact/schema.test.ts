@@ -31,8 +31,8 @@ describe("contactSchema", () => {
     expect(
       contactSchema.safeParse({ ...valid, company: undefined }).success,
     ).toBe(true);
-    expect(contactSchema.safeParse({ ...valid, turnstileToken: "" }).success).toBe(
-      false,
-    );
+    expect(
+      contactSchema.safeParse({ ...valid, turnstileToken: "" }).success,
+    ).toBe(false);
   });
 });

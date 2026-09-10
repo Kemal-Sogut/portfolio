@@ -1,6 +1,9 @@
 import { describe, expect, it, vi } from "vitest";
 
-import { buildContactEmail, sendContactEmail } from "../../src/lib/contact/email";
+import {
+  buildContactEmail,
+  sendContactEmail,
+} from "../../src/lib/contact/email";
 
 const input = {
   name: "<b>Eve</b>",
@@ -47,7 +50,11 @@ describe("sendContactEmail", () => {
       async () => new Response("nope", { status: 422 }),
     ) as unknown as typeof fetch;
     expect(
-      await sendContactEmail(input, { apiKey: "re_x", to: "me@example.com" }, f),
+      await sendContactEmail(
+        input,
+        { apiKey: "re_x", to: "me@example.com" },
+        f,
+      ),
     ).toBe(false);
   });
 });

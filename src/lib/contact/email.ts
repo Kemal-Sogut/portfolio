@@ -8,10 +8,8 @@ const escapeHtml = (s: string) =>
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
 const stripTags = (s: string) => s.replace(/<[^>]*>/g, "");
-const label = (
-  list: readonly { value: string; label: string }[],
-  v: string,
-) => list.find((x) => x.value === v)?.label ?? v;
+const label = (list: readonly { value: string; label: string }[], v: string) =>
+  list.find((x) => x.value === v)?.label ?? v;
 
 export function buildContactEmail(input: ContactInput) {
   const name = stripTags(input.name);
@@ -27,9 +25,7 @@ export function buildContactEmail(input: ContactInput) {
   const html =
     `<h2>${escapeHtml(subject)}</h2><table>` +
     rows
-      .map(
-        ([k, v]) => `<tr><td><b>${k}</b></td><td>${escapeHtml(v)}</td></tr>`,
-      )
+      .map(([k, v]) => `<tr><td><b>${k}</b></td><td>${escapeHtml(v)}</td></tr>`)
       .join("") +
     `</table><h3>Message</h3><p>${escapeHtml(input.message).replace(/\n/g, "<br>")}</p>`;
   const text =

@@ -4,3 +4,5 @@ package-lock.json
 src/components/ui
 .astro
 public
+docs
+wrangler.jsonc
