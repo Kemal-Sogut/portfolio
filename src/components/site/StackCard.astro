@@ -1,0 +1,33 @@
+---
+interface Props {
+  title: string;
+  stack: string[];
+}
+
+const { title, stack } = Astro.props;
+---
+
+<div class="bg-card rounded-2xl border p-5 font-mono text-xs">
+  <div class="flex items-center gap-1.5">
+    <span class="size-2.5 rounded-full bg-red-400" aria-hidden="true"></span>
+    <span class="size-2.5 rounded-full bg-yellow-400" aria-hidden="true"></span>
+    <span class="size-2.5 rounded-full bg-green-400" aria-hidden="true"></span>
+    <span class="text-muted-foreground ml-3">{title}</span>
+  </div>
+  <ul class="mt-4 space-y-1.5">
+    {
+      stack.map((s, i) => (
+        <li>
+          <span class="text-muted-foreground">
+            {String(i + 1).padStart(2, "0")}
+          </span>
+          <span class="text-primary" aria-hidden="true">
+            {" "}
+            ├─{" "}
+          </span>
+          {s}
+        </li>
+      ))
+    }
+  </ul>
+</div>

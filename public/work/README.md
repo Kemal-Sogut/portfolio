@@ -1,0 +1,1 @@
+Drop screenshots here and reference them from src/content/work/<slug>.mdx via `cover: "/work/<file>.png"` (1600×1000 recommended). Wanted: measure-blinds order editor, customer page, PDF; employee-log-keeper dashboard.

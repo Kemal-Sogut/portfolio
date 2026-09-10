@@ -1,0 +1,30 @@
+---
+import { getCollection } from "astro:content";
+
+import CaseStudyCard from "@/components/site/CaseStudyCard.astro";
+import CtaBand from "@/components/site/CtaBand.astro";
+import SectionHeading from "@/components/site/SectionHeading.astro";
+import DefaultLayout from "@/layouts/DefaultLayout.astro";
+
+const work = (await getCollection("work")).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+---
+
+<DefaultLayout
+  title="Work"
+  description="Case studies: a field estimator for Blinds Nisa, a staff logging tool for PLAY, an invoicing product, and more."
+>
+  <section class="container pt-28 pb-16 lg:pt-40">
+    <SectionHeading
+      eyebrow="Work"
+      title="Real software, in use, with the numbers"
+      sub="Every project below is either live, delivered, or in active development. Code links are included where the client allows it."
+      align="left"
+    />
+    <div class="mt-12 grid gap-6 md:grid-cols-2">
+      {work.map((w) => <CaseStudyCard slug={w.id} {...w.data} />)}
+    </div>
+  </section>
+  <CtaBand />
+</DefaultLayout>

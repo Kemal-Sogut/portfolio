@@ -1,0 +1,51 @@
+---
+import StackCard from "./StackCard.astro";
+
+interface Props {
+  slug: string;
+  title: string;
+  client: string;
+  summary: string;
+  status: string;
+  year: number;
+  stack: string[];
+  cover?: string;
+}
+
+const { slug, title, client, summary, status, year, stack, cover } =
+  Astro.props;
+const badge =
+  { live: "Live", delivered: "Delivered", "in-progress": "In progress" }[
+    status
+  ] ?? status;
+---
+
+<a
+  href={`/work/${slug}`}
+  class="group hover:border-primary/50 flex flex-col overflow-hidden rounded-2xl border transition-colors"
+>
+  {
+    cover ? (
+      <img
+        src={cover}
+        alt={`${title} screenshot`}
+        class="aspect-[16/10] w-full object-cover"
+        loading="lazy"
+      />
+    ) : (
+      <div class="p-4">
+        <StackCard title={client} stack={stack.slice(0, 5)} />
+      </div>
+    )
+  }
+  <div class="flex flex-1 flex-col p-6">
+    <div class="flex items-center justify-between gap-3 font-mono text-xs">
+      <span class="text-muted-foreground">{client}</span>
+      <span class="shrink-0 rounded-full border px-2 py-0.5">
+        {badge} · {year}
+      </span>
+    </div>
+    <h3 class="mt-3 text-lg font-semibold group-hover:underline">{title}</h3>
+    <p class="text-muted-foreground mt-2 text-sm">{summary}</p>
+  </div>
+</a>
