@@ -1,0 +1,18 @@
+---
+
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+import { Background } from '@/components/background';
+import { AboutHero } from '@/components/blocks/about-hero';
+import { AboutSection } from '@/components/blocks/about-section';
+import DefaultLayout from '@/layouts/DefaultLayout.astro';
+---
+
+<DefaultLayout title={SITE_TITLE} description={SITE_DESCRIPTION} >
+    <Background>
+      <div class="py-28 lg:py-32 lg:pt-44">
+        <AboutHero />
+        <AboutSection />
+      </div>
+    </Background>
+</DefaultLayout>
