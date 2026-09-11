@@ -61,7 +61,22 @@ const imageURL = new URL(image, Astro.site);
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+{/* Load the font CSS without blocking the first paint; display=swap then
+    swaps Inter/DM Mono in over the system fallback. */}
 <link
+  rel="preload"
+  as="style"
   href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:opsz,wght@14..32,400..800&display=swap"
-  rel="stylesheet"
 />
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:opsz,wght@14..32,400..800&display=swap"
+  media="print"
+  onload="this.media='all'"
+/>
+<noscript>
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:opsz,wght@14..32,400..800&display=swap"
+  />
+</noscript>
