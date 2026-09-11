@@ -7,9 +7,9 @@ import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 
 export default defineConfig({
-  // TODO: confirm the workers.dev subdomain of the kemalsogut7c Cloudflare
-  // account on first deploy, then replace with the custom domain (spec §10).
-  site: "https://portfolio.kemalsogut.workers.dev",
+  // Confirmed against the first deploy. Replace with the custom domain once
+  // one is purchased (spec §10).
+  site: "https://portfolio.kemalsogut7c.workers.dev",
   output: "static",
   adapter: cloudflare({ imageService: "compile" }),
   integrations: [mdx(), sitemap(), react()],

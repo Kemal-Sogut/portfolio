@@ -22,7 +22,7 @@ pnpm cf:dev        # build + wrangler dev — use this to test /api/contact
 pnpm build         # emits dist/ (static assets + dist/_worker.js/)
 pnpm test          # vitest, contact backend
 pnpm check         # astro check + tsc --noEmit
-pnpm deploy        # build + wrangler deploy
+pnpm run deploy    # build + wrangler deploy (`pnpm deploy` is a built-in)
 ```
 
 Test the contact form through `pnpm cf:dev`, not `pnpm dev`. Only the Worker
@@ -77,8 +77,18 @@ pnpm dlx playwright install chromium && pnpm dlx playwright node scripts/og.mjs
 
 ## Deployment
 
+Live at **https://portfolio.kemalsogut7c.workers.dev**
+
 Deployed as a Cloudflare Worker with static assets. Pushes to `main` deploy to
 production through Workers Builds; other branches get preview versions.
+
+Use `pnpm run deploy`, not `pnpm deploy` — the latter is pnpm's own built-in
+workspace command and fails with `ERR_PNPM_CANNOT_DEPLOY`.
+
+Custom domain: pending purchase (see the design spec, section 10). When one is
+bought, update `site` in `astro.config.mjs`, `SITE.url` in `src/consts.ts` and
+the sitemap line in `public/robots.txt`, then add the hostname to the Turnstile
+widget.
 
 The Worker name in the Cloudflare dashboard must match `name` in
 `wrangler.jsonc` (`portfolio`) or builds fail.
