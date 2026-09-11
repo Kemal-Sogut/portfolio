@@ -1,76 +1,89 @@
-# Mainline Astro Template
+# Kemal Sogut — portfolio
 
-Mainline is a free template built with shadcn/ui, Tailwind 4 and Astro 5.
+Marketing site for a one-person software studio in Ottawa that builds custom web
+apps for local businesses: quoting tools, customer portals, internal dashboards,
+invoicing and automations.
 
-- [Demo](https://mainline-astro-template.vercel.app/)
-- [Documentation](https://docs.shadcnblocks.com/templates/getting-started)
-- [Figma](https://www.figma.com/design/cFCLMj7DFv0sK7EVsqKeTa/Mainline?node-id=23250-13201&t=I1nAdchDpknii5Bd-1)
+Six pages (home, services, work, pricing, about, contact) plus case-study detail
+pages. Everything is prerendered except `POST /api/contact`, which verifies a
+Cloudflare Turnstile token and sends the enquiry through Resend.
 
-![Mainline Astro Template screenshot](./public/og-image.jpg)
+## Stack
 
-## Getting Started
+Astro 5 · React 19 · Tailwind CSS 4 · shadcn/ui · Magic UI · Cloudflare Workers
+(`@astrojs/cloudflare`) · Wrangler 4 · Vitest · pnpm 9 · Node 22.
+
+## Commands
 
 ```bash
-npm install
+pnpm install       # Node >= 22, pnpm 9
+pnpm dev           # Vite dev server, fast but not the Worker runtime
+pnpm cf:dev        # build + wrangler dev — use this to test /api/contact
+pnpm build         # emits dist/ (static assets + dist/_worker.js/)
+pnpm test          # vitest, contact backend
+pnpm check         # astro check + tsc --noEmit
+pnpm deploy        # build + wrangler deploy
 ```
+
+Test the contact form through `pnpm cf:dev`, not `pnpm dev`. Only the Worker
+runtime serves the API route, the trailing-slash redirects and the 404 page.
+
+## Configuration
+
+Copy the examples and fill them in locally. Both files are git-ignored.
 
 ```bash
-npm run dev
+cp .dev.vars.example .dev.vars   # server-side, read by wrangler dev
+cp .env.example .env             # client-side, baked into the bundle at build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+| Name                        | Where                   | What it is                                     |
+| --------------------------- | ----------------------- | ---------------------------------------------- |
+| `RESEND_API_KEY`            | Worker secret           | Resend API key used to send enquiries          |
+| `TURNSTILE_SECRET`          | Worker secret           | Turnstile **secret** key, verified server-side |
+| `CONTACT_TO`                | `wrangler.jsonc` var    | Inbox that receives enquiries                  |
+| `PUBLIC_TURNSTILE_SITE_KEY` | build variable / `.env` | Turnstile **site** key, public by design       |
 
-## Features
+The examples ship Cloudflare's published always-pass Turnstile test keys, so the
+form works locally without a real widget. In production, set the two secrets with
+`pnpm wrangler secret put <NAME>`.
 
-### Core Technology Stack
+## Editing content
 
-- **Astro 5** built with Astro
-- **Tailwind CSS 4** for styling
-- **shadcn/ui** components
-- **TypeScript** support
-- **React 19**
+No code changes needed for any of this. Add or edit files and rebuild.
 
-### Key Features
+| What                       | Where                                                          |
+| -------------------------- | -------------------------------------------------------------- |
+| Case studies               | `src/content/work/<slug>.mdx`                                  |
+| Services                   | `src/content/services/*.json`                                  |
+| Pricing tiers              | `src/content/pricing/tiers.json`                               |
+| FAQ                        | `src/content/faq/*.json` (`showOnHome` controls the home page) |
+| Name, contact details, nav | `src/consts.ts`                                                |
 
-- **Shadcn UI**: uses [shadcn/ui](https://ui.shadcn.com/) core UI components
-- **Theme System**: Dark/light mode with `astro-themes`, compatible with [tweakcn](https://tweakcn.com)
-- **MDX Support**: For content pages
-- **Animations**: Motion library (Framer Motion) integration
-- **Prettier**: Pre-configured code formatting
-- **Custom Fonts**: DM Sans font family included
-- **Icons**: Lucide React + React Icons libraries
-- **Styleglide Integration**: For component previews/development
-- **Responsive Design**: Mobile-friendly layout
-- **SEO Ready**: Proper metadata and OG images included
+Schemas live in `src/content.config.ts`; the build fails loudly if a field is
+missing or the wrong type.
 
-### Pre-built Pages
+Case studies without a `cover` image render a stack card instead of a
+screenshot, so a missing asset never shows as a broken image. Drop screenshots in
+`public/work/` and reference them as `cover: "/work/<file>.png"`. A portrait goes
+at `public/about/kemal.jpg` (4:5); until it exists the about page hides the slot.
 
-- Home/Landing page
-- About page
-- Pricing page
-- FAQ page
-- Contact page with form
-- Login/Signup pages
+The social preview image is generated from `scripts/og.mjs` and committed as
+`public/og.png`. Re-run it only when the hero copy changes:
 
-### Blocks
-
-- Hero section
-- Logo showcase/marquee
-- Features section
-- Resource allocation section
-- Testimonials with carousel
-- Pricing table
-- FAQ with accordion
-- Footer
-- Navigation bar
+```bash
+pnpm dlx playwright install chromium && pnpm dlx playwright node scripts/og.mjs
+```
 
 ## Deployment
 
-Production-ready and tested for deployment on [Vercel](https://vercel.com)
+Deployed as a Cloudflare Worker with static assets. Pushes to `main` deploy to
+production through Workers Builds; other branches get preview versions.
+
+The Worker name in the Cloudflare dashboard must match `name` in
+`wrangler.jsonc` (`portfolio`) or builds fail.
 
 ## Credits
 
-- Template by [shadcnblocks.com](https://shadcnblocks.com)
-- Design by [Callum Flack](https://x.com/callumflack)
-- Dev by [Yassine Zaanouni](https://x.com/YassineZaanouni)
-- Produced by [Rob Austin](https://x.com/ausrobdev)
+Started from the [Mainline Astro template](https://github.com/shadcnblocks/mainline-astro-template)
+by shadcnblocks.com (MIT + Commons Clause).
