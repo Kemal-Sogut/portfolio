@@ -88,7 +88,8 @@ pnpm dlx playwright install chromium && pnpm dlx playwright node scripts/og.mjs
 
 ## Deployment
 
-Live at **https://portfolio.kemalsogut7c.workers.dev**
+Live at **https://kemalsogut.com** (also served at
+`portfolio.kemalsogut7c.workers.dev`; canonical URLs point at the custom domain).
 
 Deployed as a Cloudflare Worker with static assets. Pushes to `main` deploy to
 production through Workers Builds; other branches get preview versions.
@@ -96,10 +97,9 @@ production through Workers Builds; other branches get preview versions.
 Use `pnpm run deploy`, not `pnpm deploy` — the latter is pnpm's own built-in
 workspace command and fails with `ERR_PNPM_CANNOT_DEPLOY`.
 
-Custom domain: pending purchase (see the design spec, section 10). When one is
-bought, update `site` in `astro.config.mjs`, `SITE.url` in `src/consts.ts` and
-the sitemap line in `public/robots.txt`, then add the hostname to the Turnstile
-widget.
+Every hostname that serves the site must appear in both the Turnstile widget's
+domain list and `TURNSTILE_HOSTNAMES`, or the contact form returns 403 on that
+hostname while working on the others.
 
 The Worker name in the Cloudflare dashboard must match `name` in
 `wrangler.jsonc` (`portfolio`) or builds fail.

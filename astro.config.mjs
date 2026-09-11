@@ -7,9 +7,9 @@ import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 
 export default defineConfig({
-  // Confirmed against the first deploy. Replace with the custom domain once
-  // one is purchased (spec §10).
-  site: "https://portfolio.kemalsogut7c.workers.dev",
+  // Custom domain, live and serving this Worker. The workers.dev hostname
+  // still resolves; canonical URLs point here so that is what gets indexed.
+  site: "https://kemalsogut.com",
   output: "static",
   adapter: cloudflare({ imageService: "compile" }),
   integrations: [mdx(), sitemap(), react()],

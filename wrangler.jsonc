@@ -15,6 +15,6 @@
     "CONTACT_TO": "kemalsogut7c@gmail.com",
     // Hostnames siteverify may report for this deployment. Production only:
     // never list localhost here. Add the custom domain when one is bought.
-    "TURNSTILE_HOSTNAMES": "portfolio.kemalsogut7c.workers.dev"
+    "TURNSTILE_HOSTNAMES": "kemalsogut.com,portfolio.kemalsogut7c.workers.dev"
   }
 }

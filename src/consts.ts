@@ -3,7 +3,7 @@ export const SITE = {
   tagline: "Custom software for local businesses.",
   description:
     "I design and build custom web apps for local businesses in Ottawa: quoting tools, customer portals, internal dashboards and automations. One engineer, direct line, fixed quotes.",
-  url: "https://portfolio.kemalsogut7c.workers.dev",
+  url: "https://kemalsogut.com",
   location: "Ottawa, ON",
   phone: "(873) 355-1089",
   phoneHref: "tel:+18733551089",
