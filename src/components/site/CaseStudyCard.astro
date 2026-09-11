@@ -1,6 +1,9 @@
 ---
 import StackCard from "./StackCard.astro";
 
+import { ServiceGlyph } from "@/components/diagrams/glyphs";
+
+
 interface Props {
   slug: string;
   title: string;
@@ -9,10 +12,11 @@ interface Props {
   status: string;
   year: number;
   stack: string[];
+  services: string[];
   cover?: string;
 }
 
-const { slug, title, client, summary, status, year, stack, cover } =
+const { slug, title, client, summary, status, year, stack, services, cover } =
   Astro.props;
 const badge =
   { live: "Live", delivered: "Delivered", "in-progress": "In progress" }[
@@ -22,8 +26,23 @@ const badge =
 
 <a
   href={`/work/${slug}`}
-  class="group hover:border-primary/50 flex flex-col overflow-hidden rounded-2xl border transition-colors"
+  class="group hover:border-primary/50 relative flex flex-col overflow-hidden rounded-2xl border transition-colors"
 >
+  {
+    services[0] && (
+      <div
+        class="pointer-events-none absolute -top-8 -right-8 opacity-15"
+        aria-hidden="true"
+      >
+        <ServiceGlyph
+          client:visible
+          service={services[0]}
+          strokeWidth={0.3}
+          className="size-32"
+        />
+      </div>
+    )
+  }
   {
     cover ? (
       <img

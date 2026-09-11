@@ -94,10 +94,7 @@ const Portals = () => (
     <DRect x={3} y={5} width={26} height={22} rx={2} />
     <DLine x1={3} y1={10} x2={29} y2={10} />
     <DCircle cx={12} cy={16} r={3} className="text-diagram-accent" />
-    <DPath
-      d="M6.5 23.5a5.5 5.5 0 0 1 11 0"
-      className="text-diagram-accent"
-    />
+    <DPath d="M6.5 23.5a5.5 5.5 0 0 1 11 0" className="text-diagram-accent" />
     <DLine x1={21} y1={15} x2={26} y2={15} className="text-diagram-muted" />
     <DLine x1={21} y1={19} x2={26} y2={19} className="text-diagram-muted" />
     <DLine x1={21} y1={23} x2={24} y2={23} className="text-diagram-muted" />

@@ -4,6 +4,8 @@ import { getCollection } from "astro:content";
 import { Faq } from "@/components/blocks/faq";
 import { Pricing } from "@/components/blocks/pricing";
 import { PricingTable } from "@/components/blocks/pricing-table";
+import { BillingBar } from "@/components/diagrams/BillingBar";
+import { CostDrivers } from "@/components/diagrams/CostDrivers";
 import CtaBand from "@/components/site/CtaBand.astro";
 import SectionHeading from "@/components/site/SectionHeading.astro";
 import DefaultLayout from "@/layouts/DefaultLayout.astro";
@@ -26,6 +28,17 @@ const faq = (await getCollection("faq"))
       sub="These are starting points. After a free 30-minute call you get a fixed quote with milestones: 40% to start, 40% at the working demo, 20% at launch."
     />
     <Pricing client:load tiers={tiers} className="mt-12" />
+
+    <div class="mt-16 border-t pt-10">
+      <p
+        class="text-muted-foreground text-center font-mono text-xs tracking-widest uppercase"
+      >
+        How billing is split
+      </p>
+      <div class="mt-8">
+        <BillingBar client:visible />
+      </div>
+    </div>
   </section>
 
   <section class="container py-16">
@@ -42,12 +55,9 @@ const faq = (await getCollection("faq"))
       </div>
       <div class="rounded-2xl border p-6">
         <p class="font-mono text-sm">What moves the price</p>
-        <ul class="text-muted-foreground mt-2 space-y-1 text-sm">
-          <li>Number of user roles</li>
-          <li>Documents and emails to generate</li>
-          <li>Payments and third-party integrations</li>
-          <li>Data migration from spreadsheets</li>
-        </ul>
+        <div class="mt-4">
+          <CostDrivers client:visible />
+        </div>
       </div>
       <div class="rounded-2xl border p-6">
         <p class="font-mono text-sm">Always included</p>

@@ -1,7 +1,8 @@
 "use client";
 
-import { motion, useReducedMotion, type Variants } from "motion/react";
 import type { ComponentProps, ReactNode } from "react";
+
+import { motion, useReducedMotion, type Variants } from "motion/react";
 
 import { cn } from "@/lib/utils";
 
@@ -218,7 +219,11 @@ export function DDashedLine({
           x2,
           y2,
           opacity: 1,
-          transition: { duration, ease: "easeInOut", opacity: { duration: 0.1 } },
+          transition: {
+            duration,
+            ease: "easeInOut",
+            opacity: { duration: 0.1 },
+          },
         },
       }}
       {...props}
@@ -234,7 +239,14 @@ export function DArrowHead({
   direction = "right",
   duration = 0.25,
   ...props
-}: WithDuration<Omit<ComponentProps<typeof motion.polyline>, "points">> & {
+}: WithDuration<
+  // SVG elements carry their own x, y and direction attributes, which would
+  // otherwise widen these into string | number | MotionValue.
+  Omit<
+    ComponentProps<typeof motion.polyline>,
+    "points" | "x" | "y" | "direction"
+  >
+> & {
   x: number;
   y: number;
   size?: number;

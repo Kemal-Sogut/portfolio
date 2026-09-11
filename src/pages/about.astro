@@ -1,4 +1,6 @@
 ---
+import { ShopToSoftware } from "@/components/diagrams/ShopToSoftware";
+import { Timeline } from "@/components/diagrams/Timeline";
 import CtaBand from "@/components/site/CtaBand.astro";
 import { buttonVariants } from "@/components/ui/button";
 import { SITE } from "@/consts";
@@ -110,17 +112,23 @@ const timeline = [
         class="aspect-[4/5] w-full rounded-3xl border object-cover"
         onerror="this.style.display='none'"
       />
-      <ol class="mt-8 space-y-4 border-l pl-6">
-        {
-          timeline.map((t) => (
-            <li>
-              <p class="text-muted-foreground font-mono text-xs">{t.when}</p>
-              <p class="mt-1 text-sm">{t.what}</p>
-            </li>
-          ))
-        }
-      </ol>
+      <div class="mt-8">
+        <Timeline client:visible items={timeline} />
+      </div>
     </aside>
   </section>
+  <section class="container py-20 lg:py-28">
+    <div class="border-t pt-10">
+      <p
+        class="text-muted-foreground font-mono text-xs tracking-widest uppercase"
+      >
+        Same job, different drawing
+      </p>
+      <div class="mx-auto mt-8 max-w-2xl">
+        <ShopToSoftware client:visible />
+      </div>
+    </div>
+  </section>
+
   <CtaBand />
 </DefaultLayout>

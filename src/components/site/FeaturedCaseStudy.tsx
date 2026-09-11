@@ -1,3 +1,4 @@
+import { ServiceDiagram } from "@/components/diagrams/ServiceDiagram";
 import { BorderBeam } from "@/components/ui/border-beam";
 import { Button } from "@/components/ui/button";
 import { NumberTicker } from "@/components/ui/number-ticker";
@@ -8,6 +9,7 @@ export interface FeaturedStudy {
   client: string;
   summary: string;
   stack: string[];
+  services: string[];
   metrics: { value: number; suffix: string; label: string }[];
   liveUrl?: string;
 }
@@ -36,6 +38,11 @@ export function FeaturedCaseStudy({ study }: { study: FeaturedStudy }) {
           </div>
         ))}
       </dl>
+      {study.services[0] && (
+        <div className="mt-10 border-t pt-8">
+          <ServiceDiagram service={study.services[0]} />
+        </div>
+      )}
       <ul className="mt-8 flex flex-wrap gap-2">
         {study.stack.map((s) => (
           <li

@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 
+import { ArchitectureStrip } from "@/components/diagrams/ArchitectureStrip";
 import CtaBand from "@/components/site/CtaBand.astro";
 import StackCard from "@/components/site/StackCard.astro";
 import { buttonVariants } from "@/components/ui/button";
@@ -67,6 +68,21 @@ const d = entry.data;
         </dl>
       )
     }
+
+    <section class="mt-12 border-t pt-10">
+      <p
+        class="text-muted-foreground font-mono text-xs tracking-widest uppercase"
+      >
+        How it is put together
+      </p>
+      <div class="mt-6">
+        <ArchitectureStrip
+          client:visible
+          stack={d.stack}
+          title={`How ${d.title} is put together, from browser to data.`}
+        />
+      </div>
+    </section>
 
     <div class="mt-12 grid gap-10 lg:grid-cols-[1fr_320px]">
       <div class="prose prose-neutral dark:prose-invert max-w-none">
