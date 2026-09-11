@@ -30,3 +30,6 @@ pnpm-debug.log*
 .dev.vars
 .env
 .wrangler/
+
+# internal planning docs (kept local, not published)
+docs/
