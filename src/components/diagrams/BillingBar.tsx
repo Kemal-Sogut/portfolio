@@ -10,7 +10,9 @@ import {
   DText,
 } from "@/components/diagrams/Diagram";
 
-const TRACK = { x: 20, width: 560, y: 44, height: 30 };
+// Kept narrow so the mono captions stay legible once this is scaled down
+// to a phone's width.
+const TRACK = { x: 20, width: 440, y: 44, height: 30 };
 const AXIS_Y = 88;
 
 const SEGMENTS = [
@@ -61,7 +63,7 @@ export function BillingBar() {
 
   return (
     <Diagram
-      viewBox="0 0 600 112"
+      viewBox="0 0 480 112"
       stagger={0.22}
       title="Billing is split into three milestones: 40 percent to start, 40 percent at the working demo, and 20 percent at launch."
       className="text-diagram-line mx-auto max-w-xl"
@@ -88,7 +90,7 @@ export function BillingBar() {
               x={mid}
               y={106}
               textAnchor="middle"
-              fontSize={11}
+              fontSize={12}
               className="text-muted-foreground font-mono"
             >
               {seg.label}
