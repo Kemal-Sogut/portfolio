@@ -1,11 +1,14 @@
 import { sendContactEmail } from "./email";
 import { contactSchema } from "./schema";
-import { verifyTurnstile } from "./turnstile";
+import { TURNSTILE_ACTION, parseHostnames, verifyTurnstile } from "./turnstile";
 
 export interface ContactEnv {
   RESEND_API_KEY: string;
   TURNSTILE_SECRET: string;
   CONTACT_TO: string;
+  /** Comma-separated hostnames siteverify may report. Production must not
+   *  include localhost. */
+  TURNSTILE_HOSTNAMES?: string;
 }
 
 const json = (status: number, data: unknown) =>
@@ -42,6 +45,10 @@ export async function handleContact(
     env.TURNSTILE_SECRET,
     ip,
     fetchImpl,
+    {
+      expectedAction: TURNSTILE_ACTION,
+      expectedHostnames: parseHostnames(env.TURNSTILE_HOSTNAMES),
+    },
   );
   if (!human)
     return json(403, {

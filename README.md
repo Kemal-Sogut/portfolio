@@ -37,16 +37,27 @@ cp .dev.vars.example .dev.vars   # server-side, read by wrangler dev
 cp .env.example .env             # client-side, baked into the bundle at build
 ```
 
-| Name                        | Where                   | What it is                                     |
-| --------------------------- | ----------------------- | ---------------------------------------------- |
-| `RESEND_API_KEY`            | Worker secret           | Resend API key used to send enquiries          |
-| `TURNSTILE_SECRET`          | Worker secret           | Turnstile **secret** key, verified server-side |
-| `CONTACT_TO`                | `wrangler.jsonc` var    | Inbox that receives enquiries                  |
-| `PUBLIC_TURNSTILE_SITE_KEY` | build variable / `.env` | Turnstile **site** key, public by design       |
+| Name                        | Where                              | What it is                                      |
+| --------------------------- | ---------------------------------- | ----------------------------------------------- |
+| `RESEND_API_KEY`            | Worker secret                      | Resend API key used to send enquiries           |
+| `TURNSTILE_SECRET`          | Worker secret                      | Turnstile **secret** key, verified server-side  |
+| `CONTACT_TO`                | `wrangler.jsonc` var               | Inbox that receives enquiries                   |
+| `TURNSTILE_HOSTNAMES`       | `wrangler.jsonc` var / `.dev.vars` | Comma-separated hostnames siteverify may report |
+| `PUBLIC_TURNSTILE_SITE_KEY` | build variable / `.env`            | Turnstile **site** key, public by design        |
 
-The examples ship Cloudflare's published always-pass Turnstile test keys, so the
-form works locally without a real widget. In production, set the two secrets with
-`pnpm wrangler secret put <NAME>`.
+`POST /api/contact` verifies the token the canonical way: it requires
+`success`, an `action` of `contact` matching the widget's `data-action`, and a
+`hostname` listed in `TURNSTILE_HOSTNAMES`. Anything else, including a
+siteverify timeout or a non-2xx, fails closed with a 403.
+
+Because action and hostname are checked, Cloudflare's always-pass test keys no
+longer satisfy verification: they report `example.com` and no action. Local
+development uses the real widget, so its domain list must include `localhost`
+and `127.0.0.1` alongside the production hostname.
+
+`TURNSTILE_HOSTNAMES` is per-deployment. Production is set in `wrangler.jsonc`
+and must never list `localhost`. Set the secret with
+`wrangler secret put TURNSTILE_SECRET`.
 
 ## Editing content
 

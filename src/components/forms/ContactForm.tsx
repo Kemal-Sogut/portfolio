@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Turnstile } from "@marsidev/react-turnstile";
+import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import { useForm } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
@@ -14,6 +14,7 @@ import {
   contactSchema,
   type ContactInput,
 } from "@/lib/contact/schema";
+import { TURNSTILE_ACTION } from "@/lib/contact/turnstile";
 
 const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY as string;
 
@@ -22,6 +23,7 @@ export function ContactForm({ defaultType }: { defaultType?: string }) {
     "idle",
   );
   const [serverError, setServerError] = useState<string>("");
+  const turnstileRef = useRef<TurnstileInstance>(null);
   const form = useForm<ContactInput>({
     resolver: zodResolver(contactSchema),
     defaultValues: {
@@ -66,12 +68,17 @@ export function ContactForm({ defaultType }: { defaultType?: string }) {
       } else {
         setStatus("error");
         setServerError(body.error ?? "Something went wrong.");
+        // Tokens are single-use; the attempt spent it. Get a fresh one.
+        turnstileRef.current?.reset();
+        setValue("turnstileToken", "");
       }
     } catch {
       setStatus("error");
       setServerError(
         "Could not reach the server. Please email me directly instead.",
       );
+      turnstileRef.current?.reset();
+      setValue("turnstileToken", "");
     }
   };
 
@@ -171,12 +178,14 @@ export function ContactForm({ defaultType }: { defaultType?: string }) {
       </div>
 
       <Turnstile
+        ref={turnstileRef}
         siteKey={siteKey}
         onSuccess={(t) =>
           setValue("turnstileToken", t, { shouldValidate: true })
         }
         onExpire={() => setValue("turnstileToken", "")}
-        options={{ theme: "auto" }}
+        onError={() => setValue("turnstileToken", "")}
+        options={{ theme: "auto", action: TURNSTILE_ACTION }}
       />
       {errors.turnstileToken && (
         <p className="text-destructive text-xs">

@@ -1,11 +1,13 @@
 import { describe, expect, it, vi } from "vitest";
 
 import { handleContact } from "../../src/lib/contact/handle";
+import { TURNSTILE_ACTION } from "../../src/lib/contact/turnstile";
 
 const env = {
   RESEND_API_KEY: "re_x",
   TURNSTILE_SECRET: "s",
   CONTACT_TO: "me@example.com",
+  TURNSTILE_HOSTNAMES: "x",
 };
 const body = {
   name: "Sam",
@@ -26,11 +28,18 @@ const req = (b: unknown, init: RequestInit = {}) =>
     ...init,
   });
 
-// fetch mock that answers Turnstile then Resend
+// fetch mock that answers Turnstile then Resend. The request URL is
+// https://x/api/contact, so "x" is the hostname siteverify reports back.
 const fetchSeq = (turnstile: boolean, resendStatus = 200) =>
   vi.fn(async (url: string) =>
     url.includes("turnstile")
-      ? new Response(JSON.stringify({ success: turnstile }))
+      ? new Response(
+          JSON.stringify({
+            success: turnstile,
+            action: TURNSTILE_ACTION,
+            hostname: "x",
+          }),
+        )
       : new Response("{}", { status: resendStatus }),
   ) as unknown as typeof fetch;
 
@@ -58,6 +67,14 @@ describe("handleContact", () => {
     expect(
       (await handleContact(req(body), env, fetchSeq(true, 500))).status,
     ).toBe(502);
+  });
+  it("403 when the deployment has no hostname allowlist", async () => {
+    const res = await handleContact(
+      req(body),
+      { ...env, TURNSTILE_HOSTNAMES: "" },
+      fetchSeq(true),
+    );
+    expect(res.status).toBe(403);
   });
   it("405 for non-POST", async () => {
     const res = await handleContact(

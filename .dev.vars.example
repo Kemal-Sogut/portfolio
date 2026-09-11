@@ -1,3 +1,14 @@
+# Local Worker secrets, read by `wrangler dev`. Copy to .dev.vars (git-ignored).
 RESEND_API_KEY=re_xxx
-TURNSTILE_SECRET=1x0000000000000000000000000000000AA
+
+# Turnstile SECRET key for the widget whose site key is in .env.
+# Get it from the Cloudflare dashboard, or with:
+#   wrangler turnstile widget get <sitekey>
+TURNSTILE_SECRET=
+
+# Hostnames siteverify may report locally. The widget must list these as
+# domains too, or verification fails. Production sets this in wrangler.jsonc
+# and must never include localhost.
+TURNSTILE_HOSTNAMES=localhost,127.0.0.1
+
 CONTACT_TO=kemalsogut7c@gmail.com
