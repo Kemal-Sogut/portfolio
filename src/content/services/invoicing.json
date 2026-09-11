@@ -1,7 +1,6 @@
 {
   "order": 4,
   "title": "Invoicing, payments & documents",
-  "icon": "Receipt",
   "tagline": "Estimates that become invoices, receipts that send themselves, warranties on file.",
   "forWho": "Owners who still build invoices in Word and chase e-Transfers by hand.",
   "youGet": [

@@ -4,6 +4,7 @@ import { getCollection } from "astro:content";
 import { Background } from "@/components/background";
 import { Faq } from "@/components/blocks/faq";
 import { Hero } from "@/components/blocks/hero";
+import { HeroBlueprint } from "@/components/diagrams/HeroBlueprint";
 import { Logos } from "@/components/blocks/logos";
 import { Pricing } from "@/components/blocks/pricing";
 import CtaBand from "@/components/site/CtaBand.astro";
@@ -27,6 +28,7 @@ const tiers = (await getCollection("pricing")).map((t) => t.data);
 
 <DefaultLayout title={SITE.name} description={SITE.description}>
   <Background>
+    <HeroBlueprint client:load />
     <Hero />
   </Background>
 

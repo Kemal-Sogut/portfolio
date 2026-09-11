@@ -1,7 +1,6 @@
 {
   "order": 5,
   "title": "Automation & integrations",
-  "icon": "Workflow",
   "tagline": "The reminders, expiries and hand-offs that fall through the cracks, done by software.",
   "forWho": "Anyone paying staff to copy data between tools.",
   "youGet": [
