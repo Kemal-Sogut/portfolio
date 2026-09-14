@@ -1,5 +1,6 @@
 ---
 import { Background } from "@/components/background";
+import { NotFoundSketch } from "@/components/diagrams/NotFoundSketch";
 import { buttonVariants } from "@/components/ui/button";
 import DefaultLayout from "@/layouts/DefaultLayout.astro";
 ---
@@ -22,6 +23,9 @@ import DefaultLayout from "@/layouts/DefaultLayout.astro";
         <p class="text-muted-foreground mt-4 text-lg">
           Try the work or pricing pages, or tell me what you were looking for.
         </p>
+        <div class="mt-10">
+          <NotFoundSketch client:load />
+        </div>
         <div class="mt-8 flex flex-wrap justify-center gap-3">
           <a href="/work" class={buttonVariants({ size: "lg" })}>See the work</a>
           <a

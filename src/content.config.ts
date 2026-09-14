@@ -33,14 +33,6 @@ const services = defineCollection({
   schema: z.object({
     order: z.number().int(),
     title: z.string(),
-    icon: z.enum([
-      "Ruler",
-      "LayoutDashboard",
-      "Users",
-      "Receipt",
-      "Workflow",
-      "Globe",
-    ]),
     tagline: z.string(),
     forWho: z.string(),
     youGet: z.array(z.string()).min(3).max(5),

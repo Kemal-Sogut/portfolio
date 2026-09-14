@@ -1,0 +1,17 @@
+---
+/**
+ * A drafted section divider: a dashed rule with tick marks at the quarters,
+ * the way a drawing sheet is ruled. Decorative, static, no island needed.
+ */
+---
+
+<div class="container" aria-hidden="true">
+  <div class="relative">
+    <div class="border-diagram-muted border-t border-dashed"></div>
+    {
+      ["left-0", "left-1/4", "left-1/2", "left-3/4", "right-0"].map((pos) => (
+        <span class={`bg-diagram-muted absolute -top-1 h-2 w-px ${pos}`} />
+      ))
+    }
+  </div>
+</div>

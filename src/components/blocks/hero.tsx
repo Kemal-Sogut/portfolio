@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/button";
 
 export const Hero = () => {
   return (
-    <section className="py-28 lg:py-32 lg:pt-44">
-      <div className="container max-w-4xl text-center">
+    <section className="relative py-28 lg:py-32 lg:pt-44">
+      <div className="relative container max-w-4xl text-center">
         <p className="text-muted-foreground font-mono text-xs tracking-widest uppercase">
           Ottawa · custom web apps · one engineer
         </p>

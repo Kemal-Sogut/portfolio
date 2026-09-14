@@ -1,7 +1,6 @@
 {
   "order": 2,
   "title": "Internal tools & dashboards",
-  "icon": "LayoutDashboard",
   "tagline": "Replace the shared spreadsheet with something your staff actually use.",
   "forWho": "Teams of 5–50 that track hours, logs, jobs, inventory or approvals by hand.",
   "youGet": [

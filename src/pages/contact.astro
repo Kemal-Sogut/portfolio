@@ -1,4 +1,5 @@
 ---
+import { ContactFlow } from "@/components/diagrams/ContactFlow";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { SITE } from "@/consts";
 import DefaultLayout from "@/layouts/DefaultLayout.astro";
@@ -60,6 +61,19 @@ import DefaultLayout from "@/layouts/DefaultLayout.astro";
     </div>
     <div class="bg-card rounded-3xl border p-6 md:p-10">
       <ContactForm client:load />
+    </div>
+  </section>
+
+  <section class="container pb-20 lg:pb-28">
+    <div class="border-t pt-10">
+      <p
+        class="text-muted-foreground font-mono text-xs tracking-widest uppercase"
+      >
+        What happens next
+      </p>
+      <div class="mt-6">
+        <ContactFlow client:visible />
+      </div>
     </div>
   </section>
 </DefaultLayout>

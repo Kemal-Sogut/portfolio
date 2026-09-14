@@ -6,10 +6,12 @@ import { Faq } from "@/components/blocks/faq";
 import { Hero } from "@/components/blocks/hero";
 import { Logos } from "@/components/blocks/logos";
 import { Pricing } from "@/components/blocks/pricing";
+import { HeroBlueprint } from "@/components/diagrams/HeroBlueprint";
 import CtaBand from "@/components/site/CtaBand.astro";
 import { FeaturedCaseStudy } from "@/components/site/FeaturedCaseStudy";
 import ProcessSteps from "@/components/site/ProcessSteps.astro";
 import SectionHeading from "@/components/site/SectionHeading.astro";
+import SectionRule from "@/components/site/SectionRule.astro";
 import { ServicesBento } from "@/components/site/ServicesBento";
 import { SITE } from "@/consts";
 import DefaultLayout from "@/layouts/DefaultLayout.astro";
@@ -27,6 +29,7 @@ const tiers = (await getCollection("pricing")).map((t) => t.data);
 
 <DefaultLayout title={SITE.name} description={SITE.description}>
   <Background>
+    <HeroBlueprint client:load />
     <Hero />
   </Background>
 
@@ -54,6 +57,8 @@ const tiers = (await getCollection("pricing")).map((t) => t.data);
     )
   }
 
+  <SectionRule />
+
   <section class="container py-20 lg:py-28">
     <SectionHeading
       eyebrow="How a project runs"
@@ -61,6 +66,8 @@ const tiers = (await getCollection("pricing")).map((t) => t.data);
     />
     <div class="mt-12"><ProcessSteps /></div>
   </section>
+
+  <SectionRule />
 
   <section class="container py-20 lg:py-28">
     <SectionHeading
@@ -70,6 +77,8 @@ const tiers = (await getCollection("pricing")).map((t) => t.data);
     />
     <Pricing client:visible tiers={tiers} className="mt-12" />
   </section>
+
+  <SectionRule />
 
   <section class="container py-20 lg:py-28">
     <SectionHeading eyebrow="FAQ" title="Questions owners ask first" />

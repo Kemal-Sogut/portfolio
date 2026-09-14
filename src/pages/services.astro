@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 
+import { ServiceGlyph } from "@/components/diagrams/glyphs";
 import CtaBand from "@/components/site/CtaBand.astro";
 import SectionHeading from "@/components/site/SectionHeading.astro";
 import ServiceSection from "@/components/site/ServiceSection.astro";
@@ -27,8 +28,14 @@ const services = (await getCollection("services")).sort(
         services.map((s) => (
           <a
             href={`#${s.id}`}
-            class="hover:border-primary rounded-full border px-3 py-1 text-sm transition-colors"
+            class="hover:border-primary flex items-center gap-2 rounded-full border px-3 py-1 text-sm transition-colors"
           >
+            <ServiceGlyph
+              client:visible
+              service={s.id}
+              strokeWidth={2}
+              className="text-diagram-line size-4 shrink-0"
+            />
             {s.data.title}
           </a>
         ))
